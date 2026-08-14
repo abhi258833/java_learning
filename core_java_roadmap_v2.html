@@ -1,0 +1,219 @@
+
+<style>
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.rmap-header{display:flex;align-items:center;gap:14px;padding:18px 20px 16px;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);margin-bottom:6px}
+.rmap-icon{width:44px;height:44px;border-radius:10px;background:#534AB7;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rmap-icon i{font-size:22px;color:#fff}
+.rmap-title{font-size:18px;font-weight:500;color:var(--color-text-primary);margin:0}
+.rmap-sub{font-size:12px;color:var(--color-text-secondary);margin:2px 0 0}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;text-align:center}
+.stat-num{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+
+.overall-wrap{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+.overall-ring-wrap{flex-shrink:0}
+.overall-ring-label{font-size:10px;font-weight:500;text-anchor:middle;dominant-baseline:central;fill:var(--color-text-primary)}
+.overall-info{flex:1}
+.overall-big{font-size:13px;font-weight:500;color:var(--color-text-primary);margin:0 0 4px}
+.overall-small{font-size:12px;color:var(--color-text-secondary);margin:0}
+
+.phase{margin-bottom:8px;border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);overflow:hidden}
+.phase-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.phase-head:hover .ph-title{color:var(--color-text-primary)}
+.phase-badge{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.phase-badge i{font-size:18px}
+.ph-meta{flex:1;min-width:0}
+.ph-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph-row{display:flex;align-items:center;gap:8px;margin-top:3px}
+.ph-sub{font-size:11px;color:var(--color-text-secondary)}
+.ph-duration{font-size:11px;font-weight:500;padding:2px 7px;border-radius:99px}
+.ph-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.ph-pct{font-size:12px;font-weight:500;color:var(--color-text-secondary)}
+.ph-chevron{font-size:14px;color:var(--color-text-tertiary);transition:transform .2s}
+.phase.open .ph-chevron{transform:rotate(180deg)}
+.mini-ring{flex-shrink:0}
+
+.phase-body{display:none;border-top:0.5px solid var(--color-border-tertiary)}
+.phase.open .phase-body{display:block}
+
+.phase-inner{padding:14px 16px}
+
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:7px;margin-bottom:12px}
+.tp{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);cursor:pointer;transition:border-color .15s,background .15s}
+.tp:hover{border-color:var(--color-border-secondary);background:var(--color-background-tertiary)}
+.tp.done{background:var(--ph-bg);border-color:var(--ph-border)}
+.tp-chk{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--color-border-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.tp.done .tp-chk{background:var(--ph-color);border-color:var(--ph-color)}
+.tp-label{font-size:12px;color:var(--color-text-secondary);transition:color .15s;line-height:1.3}
+.tp.done .tp-label{color:var(--ph-dark);font-weight:500}
+
+.tip{border-radius:var(--border-radius-md);padding:10px 13px;font-size:12px;line-height:1.6;display:flex;gap:9px;align-items:flex-start;border:0.5px solid var(--ph-border)}
+.tip-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.tip-text{color:var(--color-text-secondary)}
+
+.connector{display:flex;justify-content:center;padding:3px 0;margin-bottom:5px}
+.connector-line{width:2px;height:16px;background:var(--color-border-tertiary);border-radius:1px}
+</style>
+
+<h2 class="sr-only">Core Java learning roadmap — 6 interactive phases with checkable topics, progress rings, and overall tracker.</h2>
+
+<div class="rmap-header">
+  <div class="rmap-icon"><i class="ti ti-brand-java" aria-hidden="true"></i></div>
+  <div>
+    <p class="rmap-title">Core Java learning roadmap</p>
+    <p class="rmap-sub">For developers who know the basics — check topics as you complete them</p>
+  </div>
+  <div style="margin-left:auto">
+    <div class="overall-wrap" style="margin-bottom:0;padding:10px 14px">
+      <svg class="overall-ring-wrap" width="52" height="52" viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="21" fill="none" stroke="var(--color-border-tertiary)" stroke-width="4"/>
+        <circle id="oring" cx="26" cy="26" r="21" fill="none" stroke="#534AB7" stroke-width="4" stroke-linecap="round"
+          stroke-dasharray="132" stroke-dashoffset="132" transform="rotate(-90 26 26)" style="transition:stroke-dashoffset .4s"/>
+        <text x="26" y="27" text-anchor="middle" dominant-baseline="central" style="font-size:11px;font-weight:500;fill:var(--color-text-primary)" id="opct-label">0%</text>
+      </svg>
+      <div>
+        <p class="overall-big">Overall progress</p>
+        <p class="overall-small" id="opct-sub">0 of 57 topics done</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">phases</div></div>
+  <div class="stat-card"><div class="stat-num">57</div><div class="stat-label">topics</div></div>
+  <div class="stat-card"><div class="stat-num">~5 mo</div><div class="stat-label">timeline</div></div>
+</div>
+
+<div id="phases-wrap"></div>
+
+<script>
+const phases=[
+  {icon:"ti-cube",color:"#534AB7",bg:"#EEEDFE",border:"#AFA9EC",dark:"#26215C",
+   title:"Object-oriented programming",sub:"The backbone of Java",dur:"3–4 weeks",
+   topics:["Classes & Objects","Constructors","Encapsulation","Inheritance","Polymorphism","Abstraction","Interfaces","Abstract classes","Static & instance members","this & super keywords","Access modifiers","Object class methods"],
+   tip:"Model real-world things: a Bank Account, a Vehicle. OOP clicks faster through examples than theory."},
+  {icon:"ti-braces",color:"#534AB7",bg:"#EEEDFE",border:"#AFA9EC",dark:"#26215C",
+   title:"Core Java concepts",sub:"Strings, exceptions & packages",dur:"2–3 weeks",
+   topics:["String & StringBuilder","String methods","Exception handling","Custom exceptions","Checked vs Unchecked","Packages & imports","Inner & anonymous classes","Enums","Wrapper classes","Autoboxing / Unboxing"],
+   tip:"Master String vs StringBuilder performance differences early — it's a classic interview topic."},
+  {icon:"ti-list-tree",color:"#0F6E56",bg:"#E1F5EE",border:"#5DCAA5",dark:"#04342C",
+   title:"Collections framework",sub:"Data structures the Java way",dur:"2–3 weeks",
+   topics:["ArrayList & LinkedList","HashSet, TreeSet, LinkedHashSet","HashMap, TreeMap, LinkedHashMap","Queue & Deque","Stack","Iterator & ListIterator","Collections utility class","Comparable & Comparator","Generics basics","Wildcard generics"],
+   tip:"Know the time complexity of each collection. HashMap O(1) lookup vs TreeMap O(log n) — interviewers love this."},
+  {icon:"ti-lambda",color:"#185FA5",bg:"#E6F1FB",border:"#85B7EB",dark:"#042C53",
+   title:"Java 8+ modern features",sub:"Functional style & Stream API",dur:"3–4 weeks",
+   topics:["Lambda expressions","Functional interfaces","Method references","Stream API","filter / map / reduce","collect & Collectors","Optional class","Default & static interface methods","Date & Time API","var keyword (Java 10+)"],
+   tip:"Start by rewriting for-loops as streams. The patterns become second nature surprisingly fast."},
+  {icon:"ti-arrows-split",color:"#BA7517",bg:"#FAEEDA",border:"#EF9F27",dark:"#412402",
+   title:"Multithreading & concurrency",sub:"Safe, performant concurrent code",dur:"3–4 weeks",
+   topics:["Thread lifecycle","Thread & Runnable","synchronized keyword","wait / notify / notifyAll","volatile keyword","Executor framework","Thread pools","Callable & Future","ReentrantLock","AtomicInteger & friends","ConcurrentHashMap","Deadlock & prevention"],
+   tip:"Start with simple producer-consumer problems before touching the Executor framework — concurrency needs solid basics."},
+  {icon:"ti-topology-star",color:"#993C1D",bg:"#FAECE7",border:"#F0997B",dark:"#4A1B0C",
+   title:"Advanced & ecosystem topics",sub:"I/O, JVM internals & patterns",dur:"3–4 weeks",
+   topics:["File I/O & NIO","Serialization","Reflection API","Annotations","Design patterns","JVM architecture","Garbage collection","Java modules (JPMS)","JUnit testing","Debugging & profiling"],
+   tip:"Don't memorize all patterns — deeply understand Singleton, Factory, Builder, Observer, Strategy, and Decorator."}
+];
+
+let state={};
+const totalTopics=phases.reduce((s,p)=>s+p.topics.length,0);
+const wrap=document.getElementById('phases-wrap');
+
+function updateOverall(){
+  const done=Object.values(state).filter(Boolean).length;
+  const pct=Math.round(done/totalTopics*100);
+  const circ=132;
+  document.getElementById('oring').style.strokeDashoffset=circ-(circ*pct/100);
+  document.getElementById('opct-label').textContent=pct+'%';
+  document.getElementById('opct-sub').textContent=done+' of '+totalTopics+' topics done';
+}
+
+function updatePhaseRing(pi){
+  const p=phases[pi];
+  const done=p.topics.filter((t,ti)=>state[pi+'_'+ti]).length;
+  const pct=Math.round(done/p.topics.length*100);
+  const circ=2*Math.PI*13;
+  const el=document.getElementById('pring_'+pi);
+  if(el) el.style.strokeDashoffset=circ-(circ*pct/100);
+  const pl=document.getElementById('ppct_'+pi);
+  if(pl) pl.textContent=pct+'%';
+}
+
+phases.forEach((p,pi)=>{
+  if(pi>0){
+    const con=document.createElement('div');
+    con.className='connector';
+    con.innerHTML='<div class="connector-line"></div>';
+    wrap.appendChild(con);
+  }
+
+  const ph=document.createElement('div');
+  ph.className='phase';
+  const circ=2*Math.PI*13;
+
+  const topicsHTML=p.topics.map((t,ti)=>`
+    <div class="tp" id="tp_${pi}_${ti}" style="--ph-color:${p.color};--ph-bg:${p.bg};--ph-border:${p.border};--ph-dark:${p.dark}"
+      onclick="toggleTopic(${pi},${ti},this)">
+      <div class="tp-chk" id="chk_${pi}_${ti}">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" id="chksvg_${pi}_${ti}" style="display:none">
+          <path d="M1.5 5l2.5 2.5L8.5 2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="tp-label">${t}</span>
+    </div>`).join('');
+
+  ph.innerHTML=`
+    <div class="phase-head" onclick="togglePhase(${pi})">
+      <div class="phase-badge" style="background:${p.bg}">
+        <i class="ti ${p.icon}" aria-hidden="true" style="color:${p.color}"></i>
+      </div>
+      <div class="ph-meta">
+        <p class="ph-title">${p.title}</p>
+        <div class="ph-row">
+          <span class="ph-sub">${p.sub}</span>
+          <span class="ph-duration" style="background:${p.bg};color:${p.dark}">${p.dur}</span>
+        </div>
+      </div>
+      <div class="ph-right">
+        <svg class="mini-ring" width="36" height="36" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="13" fill="none" stroke="var(--color-border-tertiary)" stroke-width="3"/>
+          <circle id="pring_${pi}" cx="18" cy="18" r="13" fill="none" stroke="${p.color}" stroke-width="3"
+            stroke-linecap="round" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${circ.toFixed(1)}"
+            transform="rotate(-90 18 18)" style="transition:stroke-dashoffset .35s"/>
+          <text x="18" y="19" text-anchor="middle" dominant-baseline="central" style="font-size:8px;font-weight:500;fill:var(--color-text-primary)" id="ppct_${pi}">0%</text>
+        </svg>
+        <i class="ti ti-chevron-down ph-chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-inner">
+        <div class="topic-grid">${topicsHTML}</div>
+        <div class="tip" style="background:${p.bg};--ph-border:${p.border}">
+          <i class="ti ti-bulb tip-icon" aria-hidden="true" style="color:${p.color}"></i>
+          <span class="tip-text">${p.tip}</span>
+        </div>
+      </div>
+    </div>`;
+  wrap.appendChild(ph);
+});
+
+window.togglePhase=function(pi){
+  const cards=document.querySelectorAll('.phase');
+  cards[pi].classList.toggle('open');
+};
+
+window.toggleTopic=function(pi,ti,el){
+  const key=pi+'_'+ti;
+  state[key]=!state[key];
+  const done=state[key];
+  el.classList.toggle('done',done);
+  document.getElementById('chksvg_'+pi+'_'+ti).style.display=done?'block':'none';
+  updatePhaseRing(pi);
+  updateOverall();
+};
+
+updateOverall();
+</script>
